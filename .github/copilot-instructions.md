@@ -1,0 +1,2 @@
+- Write in TypeScript
+- Always use the smallest, latest library versions
