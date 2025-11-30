@@ -490,6 +490,23 @@ body {
   border: none !important;
 }
 
+/* Larger click target for pins */
+.custom-pin-icon > div {
+  position: relative;
+}
+
+.custom-pin-icon > div::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+}
+
 /* Pin popup styles */
 .pin-popup {
   min-width: 200px;

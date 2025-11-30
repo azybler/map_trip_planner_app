@@ -27,8 +27,8 @@ const createCustomIcon = (pin: Pin) => {
   const iconHtml = `
     <div style="
       background-color: ${pin.color};
-      width: 25px;
-      height: 25px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       border: 3px solid white;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
@@ -37,7 +37,8 @@ const createCustomIcon = (pin: Pin) => {
       justify-content: center;
       color: white;
       font-weight: bold;
-      font-size: 12px;
+      font-size: 14px;
+      cursor: pointer;
     ">
       ${pin.type === 'stay' ? '🏠' : pin.type === 'eat' ? '🍽️' : '🎯'}
     </div>
@@ -46,8 +47,8 @@ const createCustomIcon = (pin: Pin) => {
   return L.divIcon({
     html: iconHtml,
     className: 'custom-pin-icon',
-    iconSize: [25, 25],
-    iconAnchor: [12.5, 12.5],
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
   });
 };
 
@@ -66,7 +67,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
   center,
   zoom,
   onMapClick,
-  onPinClick,
+  onPinClick: _onPinClick, // Keep for potential future use (e.g., sidebar pin clicks)
   onRemovePin,
 }) => {
   const [pinToDelete, setPinToDelete] = useState<Pin | null>(null);
@@ -108,9 +109,6 @@ const MapComponent: React.FC<MapComponentProps> = ({
             key={pin.id}
             position={pin.position}
             icon={createCustomIcon(pin)}
-            eventHandlers={{
-              click: () => onPinClick(pin),
-            }}
           >
             <Popup>
               <div className="pin-popup">
