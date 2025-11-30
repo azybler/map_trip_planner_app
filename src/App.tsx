@@ -117,6 +117,7 @@ function App() {
           zoom={mapZoom}
           onMapClick={handleMapClick}
           onPinClick={handlePinClick}
+          onRemovePin={handleRemovePin}
         />
       </div>
     </div>

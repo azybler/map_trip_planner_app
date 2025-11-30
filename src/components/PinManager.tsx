@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LocationBasedPinManager from './LocationBasedPinManager';
+import ManualPinEntry from './ManualPinEntry';
 import type { Pin } from '../types';
 
 interface PinManagerProps {
@@ -204,6 +205,8 @@ const PinManager: React.FC<PinManagerProps> = ({
       {!selectedPosition && !editingPin && (
         <div>
           <LocationBasedPinManager onAddPin={onAddPin} />
+          
+          <ManualPinEntry onAddPin={onAddPin} />
           
           <div className="instructions">
             <p>Or click anywhere on the map to add a pin at that precise location</p>

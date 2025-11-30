@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import type { Pin } from '../types';
+import ConfirmationModal from './ConfirmationModal';
 import 'leaflet/dist/leaflet.css';
 
 // Fix for default markers in react-leaflet
@@ -18,6 +19,7 @@ interface MapComponentProps {
   zoom: number;
   onMapClick: (position: [number, number]) => void;
   onPinClick: (pin: Pin) => void;
+  onRemovePin: (id: string) => void;
 }
 
 // Custom marker icon based on pin type and color
@@ -65,7 +67,25 @@ const MapComponent: React.FC<MapComponentProps> = ({
   zoom,
   onMapClick,
   onPinClick,
+  onRemovePin,
 }) => {
+  const [pinToDelete, setPinToDelete] = useState<Pin | null>(null);
+
+  const handleDeleteClick = (pin: Pin) => {
+    setPinToDelete(pin);
+  };
+
+  const handleConfirmDelete = () => {
+    if (pinToDelete) {
+      onRemovePin(pinToDelete.id);
+      setPinToDelete(null);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setPinToDelete(null);
+  };
+
   return (
     <div className="map-container">
       <MapContainer
@@ -110,21 +130,40 @@ const MapComponent: React.FC<MapComponentProps> = ({
                     </a>
                   </p>
                 )}
-                <div
-                  style={{
-                    width: '20px',
-                    height: '20px',
-                    backgroundColor: pin.color,
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    marginLeft: '5px',
-                  }}
-                />
+                <div className="popup-footer">
+                  <div
+                    style={{
+                      width: '20px',
+                      height: '20px',
+                      backgroundColor: pin.color,
+                      borderRadius: '50%',
+                      display: 'inline-block',
+                    }}
+                  />
+                  <button
+                    className="popup-delete-button"
+                    onClick={() => handleDeleteClick(pin)}
+                    aria-label={`Delete ${pin.name}`}
+                  >
+                    🗑️
+                  </button>
+                </div>
               </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
+
+      <ConfirmationModal
+        isOpen={pinToDelete !== null}
+        title="Delete Pin"
+        message={`Are you sure you want to delete "${pinToDelete?.name}"? This action cannot be undone.`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        variant="danger"
+      />
     </div>
   );
 };
