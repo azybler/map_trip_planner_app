@@ -23,6 +23,7 @@ const PinManager: React.FC<PinManagerProps> = ({
   const [description, setDescription] = useState('');
   const [type, setType] = useState<'stay' | 'eat' | 'activity'>('eat');
   const [color, setColor] = useState('#ff6b6b');
+  const [link, setLink] = useState('');
   const [editingPin, setEditingPin] = useState<Pin | null>(null);
 
   const handleAddPin = () => {
@@ -34,6 +35,7 @@ const PinManager: React.FC<PinManagerProps> = ({
       type,
       color,
       position: selectedPosition,
+      link: link.trim() || undefined,
     });
 
     // Reset form
@@ -41,6 +43,7 @@ const PinManager: React.FC<PinManagerProps> = ({
     setDescription('');
     setType('eat');
     setColor('#ff6b6b');
+    setLink('');
     onClearSelection();
   };
 
@@ -50,6 +53,7 @@ const PinManager: React.FC<PinManagerProps> = ({
     setDescription(pin.description);
     setType(pin.type);
     setColor(pin.color);
+    setLink(pin.link || '');
   };
 
   const handleSaveEdit = () => {
@@ -61,6 +65,7 @@ const PinManager: React.FC<PinManagerProps> = ({
       type,
       color,
       position: editingPin.position,
+      link: link.trim() || undefined,
     });
 
     // Reset form
@@ -69,6 +74,7 @@ const PinManager: React.FC<PinManagerProps> = ({
     setDescription('');
     setType('eat');
     setColor('#ff6b6b');
+    setLink('');
   };
 
   const handleCancelEdit = () => {
@@ -77,6 +83,7 @@ const PinManager: React.FC<PinManagerProps> = ({
     setDescription('');
     setType('eat');
     setColor('#ff6b6b');
+    setLink('');
   };
 
   const defaultColors = [
@@ -122,6 +129,18 @@ const PinManager: React.FC<PinManagerProps> = ({
               onChange={(e) => setDescription(e.target.value)}
               className="form-textarea"
               rows={3}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="pin-link">Website Link (optional):</label>
+            <input
+              id="pin-link"
+              type="url"
+              placeholder="https://example.com"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              className="form-input"
             />
           </div>
 
@@ -224,6 +243,18 @@ const PinManager: React.FC<PinManagerProps> = ({
           </div>
 
           <div className="form-group">
+            <label htmlFor="edit-pin-link">Website Link (optional):</label>
+            <input
+              id="edit-pin-link"
+              type="url"
+              placeholder="https://example.com"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
             <label htmlFor="edit-pin-type">Type:</label>
             <select
               id="edit-pin-type"
@@ -300,6 +331,18 @@ const PinManager: React.FC<PinManagerProps> = ({
                 </div>
                 {pin.description && (
                   <p className="pin-description">{pin.description}</p>
+                )}
+                {pin.link && (
+                  <div className="pin-link">
+                    <a 
+                      href={pin.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="pin-link-url"
+                    >
+                      🔗 Visit Website
+                    </a>
+                  </div>
                 )}
                 <div className="pin-meta">
                   <span className="pin-type">{pin.type}</span>

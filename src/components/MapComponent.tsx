@@ -96,7 +96,20 @@ const MapComponent: React.FC<MapComponentProps> = ({
               <div className="pin-popup">
                 <h3>{pin.name}</h3>
                 <p><strong>Type:</strong> {pin.type}</p>
-                <p><strong>Description:</strong> {pin.description}</p>
+                {pin.description && <p><strong>Description:</strong> {pin.description}</p>}
+                {pin.link && (
+                  <p>
+                    <strong>Website:</strong>{' '}
+                    <a 
+                      href={pin.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="popup-link"
+                    >
+                      Visit Website
+                    </a>
+                  </p>
+                )}
                 <div
                   style={{
                     width: '20px',

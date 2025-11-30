@@ -25,14 +25,14 @@ body {
   z-index: 1000;
   
   /* Enhanced glass effect with more transparency */
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 16px;
   box-shadow: 
     0 8px 32px 0 rgba(31, 38, 135, 0.37),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
   
   display: flex;
   flex-direction: column;
@@ -509,6 +509,42 @@ body {
 
 .pin-popup strong {
   color: #333;
+}
+
+/* Pin Link Styles */
+.pin-link {
+  margin: 8px 0;
+}
+
+.pin-link-url {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: rgba(0, 123, 255, 0.9);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(0, 123, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.pin-link-url:hover {
+  color: rgba(0, 86, 179, 1);
+  background: rgba(0, 123, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.popup-link {
+  color: rgba(0, 123, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.popup-link:hover {
+  color: rgba(0, 86, 179, 1);
+  text-decoration: underline;
 }
 
 /* Responsive design */

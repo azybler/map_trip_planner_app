@@ -20,6 +20,7 @@ const LocationBasedPinManager: React.FC<LocationBasedPinManagerProps> = ({ onAdd
   const [description, setDescription] = useState('');
   const [type, setType] = useState<'stay' | 'eat' | 'activity'>('eat');
   const [color, setColor] = useState('#ff6b6b');
+  const [link, setLink] = useState('');
   
   const searchTimeoutRef = useRef<number | null>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
@@ -100,6 +101,7 @@ const LocationBasedPinManager: React.FC<LocationBasedPinManagerProps> = ({ onAdd
       type,
       color,
       position: [parseFloat(selectedLocation.lat), parseFloat(selectedLocation.lon)],
+      link: link.trim() || undefined,
     });
 
     // Reset form
@@ -109,6 +111,7 @@ const LocationBasedPinManager: React.FC<LocationBasedPinManagerProps> = ({ onAdd
     setDescription('');
     setType('eat');
     setColor('#ff6b6b');
+    setLink('');
     setSuggestions([]);
     setShowSuggestions(false);
   };
@@ -196,6 +199,18 @@ const LocationBasedPinManager: React.FC<LocationBasedPinManagerProps> = ({ onAdd
                 onChange={(e) => setDescription(e.target.value)}
                 className="form-textarea"
                 rows={3}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="pin-link-location">Website Link (optional):</label>
+              <input
+                id="pin-link-location"
+                type="url"
+                placeholder="https://example.com"
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+                className="form-input"
               />
             </div>
 
