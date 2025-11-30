@@ -43,6 +43,7 @@ function App() {
     loadFromStorage(STORAGE_KEYS.MAP_ZOOM, 10)
   );
   const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Save pins to localStorage whenever pins change
   useEffect(() => {
@@ -99,7 +100,27 @@ function App() {
 
   return (
     <div className="app">
-      <div className="sidebar">
+      <button 
+        className="hamburger-button"
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        aria-label={isSidebarOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isSidebarOpen}
+      >
+        <span className={`hamburger-icon ${isSidebarOpen ? 'open' : ''}`}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      
+      {isSidebarOpen && (
+        <div 
+          className="sidebar-overlay"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+      
+      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <SearchComponent onLocationSelect={handleLocationSelect} />
         <PinManager
           pins={pins}
