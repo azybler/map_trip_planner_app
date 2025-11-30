@@ -228,7 +228,7 @@ const ManualPinEntry: React.FC<ManualPinEntryProps> = ({ onAddPin }) => {
               className="form-select"
             >
               <option value="stay">🏠 Place to Stay</option>
-              <option value="eat">🍽️ Place to Eat</option>
+              <option value="eat">🍔 Place to Eat</option>
               <option value="activity">🎯 Activity</option>
             </select>
           </div>

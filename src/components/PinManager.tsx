@@ -154,7 +154,7 @@ const PinManager: React.FC<PinManagerProps> = ({
               className="form-select"
             >
               <option value="stay">🏠 Place to Stay</option>
-              <option value="eat">🍽️ Place to Eat</option>
+              <option value="eat">🍔 Place to Eat</option>
               <option value="activity">🎯 Activity</option>
             </select>
           </div>
@@ -266,7 +266,7 @@ const PinManager: React.FC<PinManagerProps> = ({
               className="form-select"
             >
               <option value="stay">🏠 Place to Stay</option>
-              <option value="eat">🍽️ Place to Eat</option>
+              <option value="eat">🍔 Place to Eat</option>
               <option value="activity">🎯 Activity</option>
             </select>
           </div>
@@ -328,7 +328,7 @@ const PinManager: React.FC<PinManagerProps> = ({
                     style={{ backgroundColor: pin.color }}
                   />
                   <span className="pin-type-icon">
-                    {pin.type === 'stay' ? '🏠' : pin.type === 'eat' ? '🍽️' : '🎯'}
+                    {pin.type === 'stay' ? '🏠' : pin.type === 'eat' ? '🍔' : '🎯'}
                   </span>
                   <h4 className="pin-name">{pin.name}</h4>
                 </div>

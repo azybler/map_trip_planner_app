@@ -40,7 +40,7 @@ const createCustomIcon = (pin: Pin) => {
       font-size: 14px;
       cursor: pointer;
     ">
-      ${pin.type === 'stay' ? '🏠' : pin.type === 'eat' ? '🍽️' : '🎯'}
+      ${pin.type === 'stay' ? '🏠' : pin.type === 'eat' ? '🍔' : '🎯'}
     </div>
   `;
 
