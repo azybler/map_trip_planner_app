@@ -129,6 +129,7 @@ function App() {
           onRemovePin={handleRemovePin}
           onEditPin={handleEditPin}
           onClearSelection={handleClearSelection}
+          onPinClick={handlePinClick}
         />
       </div>
       <div className="map-section">

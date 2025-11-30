@@ -10,6 +10,7 @@ interface PinManagerProps {
   onRemovePin: (id: string) => void;
   onEditPin: (id: string, updatedPin: Omit<Pin, 'id'>) => void;
   onClearSelection: () => void;
+  onPinClick: (pin: Pin) => void;
 }
 
 const PinManager: React.FC<PinManagerProps> = ({
@@ -19,6 +20,7 @@ const PinManager: React.FC<PinManagerProps> = ({
   onRemovePin,
   onEditPin,
   onClearSelection,
+  onPinClick,
 }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -321,7 +323,14 @@ const PinManager: React.FC<PinManagerProps> = ({
         ) : (
           <div className="pins-grid">
             {pins.map((pin) => (
-              <div key={pin.id} className="pin-card">
+              <div 
+                key={pin.id} 
+                className="pin-card"
+                onClick={() => onPinClick(pin)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && onPinClick(pin)}
+              >
                 <div className="pin-header">
                   <div
                     className="pin-color-indicator"
@@ -342,6 +351,7 @@ const PinManager: React.FC<PinManagerProps> = ({
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="pin-link-url"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       🔗 Visit Website
                     </a>
@@ -351,7 +361,7 @@ const PinManager: React.FC<PinManagerProps> = ({
                   <span className="pin-type">{pin.type}</span>
                   <div className="pin-actions">
                     <button
-                      onClick={() => handleEditPin(pin)}
+                      onClick={(e) => { e.stopPropagation(); handleEditPin(pin); }}
                       className="edit-button"
                       aria-label={`Edit ${pin.name}`}
                       disabled={editingPin !== null}
@@ -359,7 +369,7 @@ const PinManager: React.FC<PinManagerProps> = ({
                       ✏️
                     </button>
                     <button
-                      onClick={() => onRemovePin(pin.id)}
+                      onClick={(e) => { e.stopPropagation(); onRemovePin(pin.id); }}
                       className="remove-button"
                       aria-label={`Remove ${pin.name}`}
                     >
