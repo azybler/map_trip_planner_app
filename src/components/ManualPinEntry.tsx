@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import type { Pin } from '../types';
 
 interface ManualPinEntryProps {
@@ -8,6 +8,14 @@ interface ManualPinEntryProps {
 const ManualPinEntry: React.FC<ManualPinEntryProps> = ({ onAddPin }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [latitude, setLatitude] = useState('');
+  const latitudeInputRef = useRef<HTMLInputElement>(null);
+
+  // Focus on latitude input when form is expanded
+  useEffect(() => {
+    if (isExpanded && latitudeInputRef.current) {
+      latitudeInputRef.current.focus();
+    }
+  }, [isExpanded]);
   const [longitude, setLongitude] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -149,6 +157,7 @@ const ManualPinEntry: React.FC<ManualPinEntryProps> = ({ onAddPin }) => {
             <div className="form-group">
               <label htmlFor="manual-latitude">Latitude:</label>
               <input
+                ref={latitudeInputRef}
                 id="manual-latitude"
                 type="text"
                 inputMode="decimal"
