@@ -42,7 +42,6 @@ function App() {
   const [mapZoom, setMapZoom] = useState(() => 
     loadFromStorage(STORAGE_KEYS.MAP_ZOOM, 10)
   );
-  const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Save pins to localStorage whenever pins change
@@ -65,10 +64,6 @@ function App() {
     setMapZoom(12);
   };
 
-  const handleMapClick = (position: [number, number]) => {
-    setSelectedPosition(position);
-  };
-
   const handleAddPin = (newPin: Omit<Pin, 'id'>) => {
     const pin: Pin = {
       ...newPin,
@@ -87,10 +82,6 @@ function App() {
         ? { ...updatedPin, id } 
         : pin
     ));
-  };
-
-  const handleClearSelection = () => {
-    setSelectedPosition(null);
   };
 
   const handlePinClick = (pin: Pin) => {
@@ -124,11 +115,9 @@ function App() {
         <SearchComponent onLocationSelect={handleLocationSelect} />
         <PinManager
           pins={pins}
-          selectedPosition={selectedPosition}
           onAddPin={handleAddPin}
           onRemovePin={handleRemovePin}
           onEditPin={handleEditPin}
-          onClearSelection={handleClearSelection}
           onPinClick={handlePinClick}
         />
       </div>
@@ -137,7 +126,6 @@ function App() {
           pins={pins}
           center={mapCenter}
           zoom={mapZoom}
-          onMapClick={handleMapClick}
           onPinClick={handlePinClick}
           onRemovePin={handleRemovePin}
         />

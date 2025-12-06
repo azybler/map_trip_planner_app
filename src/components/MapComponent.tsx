@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import type { Pin } from '../types';
 import ConfirmationModal from './ConfirmationModal';
@@ -17,7 +17,6 @@ interface MapComponentProps {
   pins: Pin[];
   center: [number, number];
   zoom: number;
-  onMapClick: (position: [number, number]) => void;
   onPinClick: (pin: Pin) => void;
   onRemovePin: (id: string) => void;
 }
@@ -52,22 +51,11 @@ const createCustomIcon = (pin: Pin) => {
   });
 };
 
-// Component to handle map click events
-function MapClickHandler({ onMapClick }: { onMapClick: (position: [number, number]) => void }) {
-  useMapEvents({
-    click: (e) => {
-      onMapClick([e.latlng.lat, e.latlng.lng]);
-    },
-  });
-  return null;
-}
-
 const MapComponent: React.FC<MapComponentProps> = ({
   pins,
   center,
   zoom,
-  onMapClick,
-  onPinClick: _onPinClick, // Keep for potential future use (e.g., sidebar pin clicks)
+  onPinClick: _onPinClick, // Used for sidebar pin clicks
   onRemovePin,
 }) => {
   const [pinToDelete, setPinToDelete] = useState<Pin | null>(null);
@@ -101,8 +89,6 @@ const MapComponent: React.FC<MapComponentProps> = ({
           subdomains="abcd"
           maxZoom={20}
         />
-        
-        <MapClickHandler onMapClick={onMapClick} />
         
         {pins.map((pin) => (
           <Marker

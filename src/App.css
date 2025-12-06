@@ -378,16 +378,6 @@ body {
   box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
 }
 
-.instructions {
-  text-align: center;
-  padding: 30px 20px;
-  color: #6c757d;
-  font-style: italic;
-  border: 2px dashed #dee2e6;
-  border-radius: 8px;
-  margin-bottom: 30px;
-}
-
 .pins-list {
   border-top: 1px solid #e0e0e0;
   padding-top: 20px;
@@ -927,16 +917,6 @@ button:focus {
 
 .pin-form {
   margin-top: 15px;
-}
-
-.instructions {
-  text-align: center;
-  padding: 15px;
-  color: #6c757d;
-  font-style: italic;
-  border: 1px dashed #dee2e6;
-  border-radius: 6px;
-  font-size: 14px;
 }
 
 /* Edit Pin Form Styles */
